@@ -1,0 +1,112 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.dropZone {
+  position: relative;
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12) var(--space-6);
+  background-color: var(--color-bg-primary);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.dropZone:hover:not(.disabled) {
+  border-color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+}
+
+.dropZone:focus-visible {
+  outline: 1.5px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.dropZone.dragging {
+  border-color: var(--color-text-primary);
+  background-color: var(--color-neutral-100);
+}
+
+.dropZone.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropZoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.uploadIcon {
+  font-size: 28px;
+  opacity: 0.5;
+  margin-bottom: var(--space-2);
+}
+
+.mainText {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.helperText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.fileCount {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background-color: var(--color-neutral-900);
+  color: var(--color-text-inverse);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.errorToast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-error-50);
+  border: 1px solid var(--color-error-500);
+  border-radius: var(--radius-md);
+  color: var(--color-error-600);
+  font-size: var(--font-size-sm);
+}
+
+.errorIcon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.errorClose {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px var(--space-2);
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.errorClose:hover {
+  opacity: 1;
+}
