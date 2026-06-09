@@ -17,7 +17,7 @@ COPY server/package*.json ./server/
 RUN npm ci --omit=dev
 COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/server/prisma ./server/prisma
-COPY --from=build /app/server/node_modules/.prisma ./server/node_modules/.prisma
+COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 WORKDIR /app/server
 EXPOSE 3000
 CMD ["node", "dist/index.js"]
