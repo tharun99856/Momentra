@@ -1,0 +1,279 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String     @id @default(uuid())
+  username       String     @unique @db.VarChar(50)
+  email          String     @unique @db.VarChar(255)
+  passwordHash   String     @map("password_hash")
+  globalRole     GlobalRole @default(user) @map("global_role")
+  avatarUrl      String?    @map("avatar_url")
+  faceDescriptor Float[]    @map("face_descriptor")
+  createdAt      DateTime   @default(now()) @map("created_at")
+
+  // Relations
+  clubMemberships    ClubMember[]
+  createdClubs       Club[]         @relation("ClubCreator")
+  createdEvents      Event[]        @relation("EventCreator")
+  uploadedMedia      Media[]        @relation("MediaUploader")
+  likes              Like[]
+  favourites         Favourite[]
+  comments           Comment[]
+  photoTags          PhotoTag[]     @relation("TaggedUser")
+  taggedBy           PhotoTag[]     @relation("TaggerUser")
+  downloads          Download[]
+  notifications      Notification[] @relation("NotificationRecipient")
+  actedNotifications Notification[] @relation("NotificationActor")
+  refreshTokens      RefreshToken[]
+
+  @@map("users")
+}
+
+model Club {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(100)
+  description String?
+  logoUrl     String?  @map("logo_url")
+  createdBy   String   @map("created_by")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  creator User         @relation("ClubCreator", fields: [createdBy], references: [id])
+  members ClubMember[]
+  events  Event[]
+
+  @@map("clubs")
+}
+
+model ClubMember {
+  clubId   String   @map("club_id")
+  userId   String   @map("user_id")
+  role     ClubRole @default(member)
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  // Relations
+  club Club @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([clubId, userId])
+  @@map("club_members")
+}
+
+model Event {
+  id           String        @id @default(uuid())
+  clubId       String        @map("club_id")
+  name         String        @db.VarChar(100)
+  description  String?       @db.VarChar(500)
+  category     EventCategory
+  date         DateTime
+  location     String?
+  visibility   Visibility    @default(public)
+  coverPhotoId String?       @map("cover_photo_id")
+  createdBy    String        @map("created_by")
+  searchVector String?       @map("search_vector") // tsvector maintained by trigger
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  club    Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  creator User    @relation("EventCreator", fields: [createdBy], references: [id])
+  media   Media[]
+
+  @@map("events")
+}
+
+model Media {
+  id            String    @id @default(uuid())
+  eventId       String    @map("event_id")
+  uploaderId    String    @map("uploader_id")
+  originalUrl   String    @map("original_url")
+  compressedUrl String?   @map("compressed_url")
+  thumbSmUrl    String?   @map("thumb_sm_url")
+  thumbMdUrl    String?   @map("thumb_md_url")
+  mediaType     MediaType @map("media_type")
+  sizeBytes     BigInt?   @map("size_bytes")
+  width         Int?
+  height        Int?
+  tags          String[]  @default([])
+  faceIds       String[]  @default([]) @map("face_ids")
+  caption       String?
+  searchVector  String?   @map("search_vector") // tsvector maintained by trigger
+  uploadedAt    DateTime  @default(now()) @map("uploaded_at")
+
+  // Relations
+  event         Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  uploader      User           @relation("MediaUploader", fields: [uploaderId], references: [id])
+  likes         Like[]
+  favourites    Favourite[]
+  comments      Comment[]
+  photoTags     PhotoTag[]
+  downloads     Download[]
+  notifications Notification[]
+
+  @@index([eventId])
+  @@map("media")
+}
+
+model Like {
+  userId    String   @map("user_id")
+  mediaId   String   @map("media_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  media Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@id([userId, mediaId])
+  @@map("likes")
+}
+
+model Favourite {
+  userId    String   @map("user_id")
+  mediaId   String   @map("media_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  media Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@id([userId, mediaId])
+  @@map("favourites")
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  mediaId   String   @map("media_id")
+  userId    String   @map("user_id")
+  parentId  String?  @map("parent_id")
+  text      String   @db.VarChar(500)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  media   Media     @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+model PhotoTag {
+  id         String   @id @default(uuid())
+  mediaId    String   @map("media_id")
+  taggedById String   @map("tagged_by_id")
+  userId     String   @map("user_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  media    Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  taggedBy User  @relation("TaggerUser", fields: [taggedById], references: [id], onDelete: Cascade)
+  user     User  @relation("TaggedUser", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([mediaId, userId])
+  @@map("photo_tags")
+}
+
+model Download {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  mediaId      String   @map("media_id")
+  downloadedAt DateTime @default(now()) @map("downloaded_at")
+
+  // Relations
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  media Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@map("downloads")
+}
+
+model Notification {
+  id          String           @id @default(uuid())
+  recipientId String           @map("recipient_id")
+  actorId     String           @map("actor_id")
+  type        NotificationType
+  mediaId     String           @map("media_id")
+  readAt      DateTime?        @map("read_at")
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  // Relations
+  recipient User  @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  actor     User  @relation("NotificationActor", fields: [actorId], references: [id], onDelete: Cascade)
+  media     Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId, readAt])
+  @@map("notifications")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+// Enums
+enum GlobalRole {
+  admin
+  user
+
+  @@map("global_role")
+}
+
+enum ClubRole {
+  admin
+  photographer
+  member
+
+  @@map("club_role")
+}
+
+enum EventCategory {
+  cultural
+  sports
+  workshop
+  trip
+  party
+  hackathon
+  other
+
+  @@map("event_category")
+}
+
+enum Visibility {
+  public
+  private
+
+  @@map("visibility")
+}
+
+enum MediaType {
+  photo
+  video
+
+  @@map("media_type")
+}
+
+enum NotificationType {
+  like
+  comment
+  reply
+  tag
+
+  @@map("notification_type")
+}
