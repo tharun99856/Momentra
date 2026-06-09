@@ -1,12 +1,6 @@
-// Social service implementation
-
 import { prisma } from '../lib/prisma.js'
 import sanitizeHtml from 'sanitize-html'
 import { z } from 'zod'
-
-// ===========================
-// DTOs and Validation
-// ===========================
 
 const AddCommentSchema = z.object({
   mediaId: z.string().uuid(),
