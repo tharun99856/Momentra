@@ -137,27 +137,6 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Stats Bar */}
-      {/* <section className={styles.statsBar}>
-        <div className={styles.statsInner}>
-          <div className={styles.stat}>
-            <span className={styles.statNumber}>10K+</span>
-            <span className={styles.statLabel}>Events created</span>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statNumber}>2M+</span>
-            <span className={styles.statLabel}>Photos managed</span>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statNumber}>500+</span>
-            <span className={styles.statLabel}>Organizations</span>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statNumber}>99.9%</span>
-            <span className={styles.statLabel}>Uptime SLA</span>
-          </div>
-        </div>
-      </section> */}
 
       {/* Features */}
       <section id="features" className={styles.features}>
