@@ -1,8 +1,9 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import { useAuthStore } from '../stores/auth.store'
 import styles from './AppLayout.module.css'
 
 const NAV_LINKS = [
-  { to: '/', label: 'Home', icon: '◐' },
+  { to: '/dashboard', label: 'Dashboard', icon: '◐' },
   { to: '/events', label: 'Events', icon: '◇' },
   { to: '/search', label: 'Search', icon: '⌕' },
   { to: '/my-photos', label: 'My photos', icon: '◯' },
@@ -11,11 +12,14 @@ const NAV_LINKS = [
 ] as const
 
 export default function AppLayout() {
+  const user = useAuthStore((s) => s.user)
+
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar} aria-label="Main navigation">
         <div className={styles.wordmark}>
           <span className={styles.logo}>Momentra</span>
+          <span className={styles.badge}>SaaS</span>
         </div>
 
         <nav className={styles.nav}>
@@ -24,7 +28,7 @@ export default function AppLayout() {
               <li key={to}>
                 <NavLink
                   to={to}
-                  end={to === '/'}
+                  end={to === '/dashboard'}
                   className={({ isActive }) =>
                     `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
                   }
@@ -37,17 +41,36 @@ export default function AppLayout() {
           </ul>
         </nav>
 
-        <div className={styles.clubSwitcher}>
-          <span className={styles.sectionLabel}>Club</span>
-          <button className={styles.clubButton} type="button">
-            Select club
+        <div className={styles.workspaceSwitcher}>
+          <span className={styles.sectionLabel}>Workspace</span>
+          <button className={styles.workspaceButton} type="button">
+            <span className={styles.workspaceAvatar}>
+              {user?.username?.charAt(0).toUpperCase() ?? 'W'}
+            </span>
+            <span className={styles.workspaceName}>My Workspace</span>
           </button>
         </div>
 
         <div className={styles.sidebarFooter}>
-          <button className={styles.notificationBtn} type="button" aria-label="Notifications">
-            ◴
-          </button>
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              `${styles.footerLink} ${isActive ? styles.footerLinkActive : ''}`
+            }
+          >
+            ⚙ Settings
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `${styles.footerLink} ${isActive ? styles.footerLinkActive : ''}`
+            }
+          >
+            <span className={styles.profileAvatar}>
+              {user?.username?.charAt(0).toUpperCase() ?? '?'}
+            </span>
+            {user?.username ?? 'Profile'}
+          </NavLink>
         </div>
       </aside>
 
@@ -56,7 +79,7 @@ export default function AppLayout() {
           <NavLink
             key={to}
             to={to}
-            end={to === '/'}
+            end={to === '/dashboard'}
             className={({ isActive }) =>
               `${styles.tabItem} ${isActive ? styles.tabItemActive : ''}`
             }

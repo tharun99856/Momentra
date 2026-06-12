@@ -1,0 +1,74 @@
+.overlay {
+  position: fixed; inset: 0; z-index: var(--z-modal);
+  background-color: rgb(20 17 11 / 0.92);
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn var(--transition-base);
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.modal {
+  position: relative; width: min(92vw, 1100px); max-height: 92vh;
+  display: flex; flex-direction: column;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.closeButton {
+  position: absolute; top: var(--space-3); right: var(--space-3); z-index: 10;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  background-color: rgb(255 255 255 / 0.9); border: none; border-radius: var(--radius-full);
+  color: var(--color-text-primary); font-size: 18px; cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+.closeButton:hover { background-color: var(--color-bg-primary); }
+.imageContainer {
+  position: relative; flex: 1; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  background-color: var(--color-neutral-900);
+}
+.image { max-width: 100%; max-height: 100%; object-fit: contain; }
+.navButton {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  background-color: rgb(255 255 255 / 0.9); border: none; border-radius: var(--radius-full);
+  color: var(--color-text-primary); font-size: 18px; cursor: pointer; z-index: 10;
+}
+.navButton:hover:not(:disabled) { background-color: var(--color-bg-primary); }
+.navButton:disabled { opacity: 0.3; cursor: not-allowed; }
+.navButtonPrev { left: var(--space-3); }
+.navButtonNext { right: var(--space-3); }
+.details {
+  display: flex; flex-direction: column;
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border);
+  max-height: 45vh; overflow-y: auto;
+}
+@media (max-width: 768px) { .details { padding: var(--space-4); max-height: 55vh; } }
+.detailsHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: var(--space-4); padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+.uploader { display: flex; align-items: center; gap: var(--space-3); }
+.uploaderAvatar {
+  width: 32px; height: 32px; border-radius: var(--radius-full);
+  background-color: var(--color-neutral-200); object-fit: cover;
+}
+.uploaderInfo { display: flex; flex-direction: column; }
+.uploaderName { margin: 0; font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-primary); }
+.uploadDate { margin: 0; font-size: var(--font-size-xs); color: var(--color-text-secondary); }
+.actions { display: flex; align-items: center; gap: var(--space-2); }
+.commentSection { flex: 1; min-height: 0; }
+.actionButton {
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  background-color: transparent; border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); font-size: 14px; cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+.actionButton:hover { border-color: var(--color-border-strong); }
+.actionButton:disabled { opacity: 0.5; cursor: not-allowed; }
+.actionButton.liked { color: var(--color-error-500); border-color: var(--color-error-500); }
+.actionButton.actionButtonActive { background-color: var(--color-neutral-100); border-color: var(--color-text-primary); }
+.loading {
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-12); font-size: var(--font-size-sm); color: var(--color-text-secondary);
+}

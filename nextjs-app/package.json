@@ -1,0 +1,47 @@
+{
+  "name": "momentra",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
+    "start": "next start",
+    "lint": "next lint",
+    "setup": "node scripts/generate-keys.mjs",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "5.22.0",
+    "@tanstack/react-query": "5.101.0",
+    "axios": "1.7.9",
+    "bcrypt": "5.1.1",
+    "cloudinary": "2.5.1",
+    "file-type": "18.7.0",
+    "jsonwebtoken": "9.0.2",
+    "next": "14.2.29",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sanitize-html": "2.17.4",
+    "sharp": "0.33.5",
+    "zod": "3.25.76",
+    "zustand": "4.5.7"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "5.0.2",
+    "@types/jsonwebtoken": "9.0.7",
+    "@types/node": "22.10.2",
+    "@types/react": "18.3.17",
+    "@types/react-dom": "18.3.5",
+    "@types/sanitize-html": "2.16.1",
+    "prisma": "5.22.0",
+    "tsx": "4.19.2",
+    "typescript": "5.6.2"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

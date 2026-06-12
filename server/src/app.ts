@@ -12,6 +12,7 @@ import mediaRouter from './routes/media.router.js'
 import socialRouter from './routes/social.router.js'
 import searchRouter from './routes/search.router.js'
 import userRouter from './routes/user.router.js'
+import shareRouter from './routes/share.router.js'
 
 export const app = express()
 
@@ -46,6 +47,7 @@ app.use('/api/users', userRouter)
 app.use('/api', mediaRouter)
 app.use('/api', socialRouter)
 app.use('/api', searchRouter)
+app.use('/api', shareRouter)
 
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error('[error]', err)

@@ -1,0 +1,13 @@
+.page { padding: var(--space-8); max-width: var(--content-max-width); margin: 0 auto; }
+@media (max-width: 768px) { .page { padding: var(--space-5) var(--space-4); } }
+.searchBar { margin-bottom: var(--space-8); }
+.input { width: 100%; padding: var(--space-4); font-size: var(--font-size-lg); border-radius: var(--radius-lg); border: 1px solid var(--color-border); background-color: var(--color-bg-primary); color: var(--color-text-primary); transition: border-color var(--transition-fast); }
+.input:focus { outline: none; border-color: var(--color-text-primary); }
+.status { text-align: center; padding: var(--space-12); color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+.results { display: grid; grid-template-columns: 2fr 3fr; gap: var(--space-8); }
+@media (max-width: 900px) { .results { grid-template-columns: 1fr; } }
+.colTitle { font-size: var(--font-size-md); font-weight: 600; color: var(--color-text-primary); margin: 0 0 var(--space-4) 0; }
+.eventsList { display: flex; flex-direction: column; gap: var(--space-4); }
+.empty { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.eventsCol {}
+.photosCol {}

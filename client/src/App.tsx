@@ -13,9 +13,11 @@ export default function App() {
   const clearAuth = useAuthStore((s) => s.clearAuth)
 
   useEffect(() => {
-    apiClient
-      .post('/api/auth/refresh')
-      .then(({ data }) => setAuth(data.user, data.accessToken))
+    const timeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('timeout')), 3000)
+    )
+    Promise.race([apiClient.post('/api/auth/refresh'), timeout])
+      .then(({ data }: any) => setAuth(data.user, data.accessToken))
       .catch(() => clearAuth())
       .finally(() => setChecking(false))
   }, [setAuth, clearAuth])

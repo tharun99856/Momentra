@@ -1,0 +1,35 @@
+.coverArea { position: relative; width: 100%; height: 360px; background-color: var(--color-neutral-200); overflow: hidden; }
+@media (max-width: 768px) { .coverArea { height: 220px; } }
+.coverImage { width: 100%; height: 100%; object-fit: cover; }
+.coverOverlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: var(--space-8); background: linear-gradient(180deg, transparent 40%, rgb(20 17 11 / 0.55) 100%); }
+@media (max-width: 768px) { .coverOverlay { padding: var(--space-4); } }
+.coverContent { max-width: var(--content-max-width); margin: 0 auto; width: 100%; color: var(--color-text-inverse); }
+.eventName { font-family: var(--font-family-display); font-size: 2.5rem; font-weight: 400; letter-spacing: -0.015em; line-height: 1.05; margin: 0 0 var(--space-2) 0; }
+@media (max-width: 768px) { .eventName { font-size: 1.75rem; } }
+.eventMeta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); font-size: var(--font-size-sm); opacity: 0.92; }
+.metaItem { display: flex; align-items: center; gap: 6px; }
+.categoryBadge { padding: 2px var(--space-2); background-color: rgb(255 255 255 / 0.16); border-radius: var(--radius-sm); font-size: var(--font-size-xs); font-weight: 500; text-transform: capitalize; }
+.metadataRow { max-width: var(--content-max-width); margin: 0 auto; padding: var(--space-4) var(--space-8); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5); border-bottom: 1px solid var(--color-border); background-color: var(--color-bg-primary); }
+@media (max-width: 768px) { .metadataRow { padding: var(--space-3) var(--space-4); } }
+.statItem { display: flex; align-items: center; gap: 6px; font-size: var(--font-size-sm); color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.visibilityBadge { padding: 2px var(--space-2); border-radius: var(--radius-sm); font-size: var(--font-size-xs); font-weight: 500; }
+.visibilityBadge.public { background-color: var(--color-success-50); color: var(--color-success-600); }
+.visibilityBadge.private { background-color: var(--color-warning-50); color: var(--color-warning-600); }
+.tabsContainer { position: sticky; top: 0; z-index: var(--z-sticky); background-color: var(--color-bg-primary); border-bottom: 1px solid var(--color-border); }
+.tabsList { max-width: var(--content-max-width); margin: 0 auto; padding: 0 var(--space-8); display: flex; gap: var(--space-1); }
+@media (max-width: 768px) { .tabsList { padding: 0 var(--space-4); } }
+.tab { padding: var(--space-3); background: transparent; border: none; border-bottom: 2px solid transparent; font-size: var(--font-size-sm); font-weight: 500; color: var(--color-text-secondary); cursor: pointer; transition: all var(--transition-fast); margin-bottom: -1px; }
+.tab:hover { color: var(--color-text-primary); }
+.tab[aria-selected='true'] { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); }
+.tabPanel { max-width: var(--content-max-width); margin: 0 auto; padding: var(--space-6) var(--space-8); min-height: 400px; }
+@media (max-width: 768px) { .tabPanel { padding: var(--space-4); } }
+.tabPanel[hidden] { display: none; }
+.loading { display: flex; align-items: center; justify-content: center; min-height: 400px; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.error { padding: var(--space-8); text-align: center; color: var(--color-error-600); }
+.errorTitle { font-size: var(--font-size-lg); font-weight: 600; margin: 0 0 var(--space-2) 0; }
+.errorMessage { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.emptyState { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 360px; text-align: center; }
+.emptyIcon { font-size: 32px; opacity: 0.4; margin-bottom: var(--space-3); }
+.emptyTitle { font-family: var(--font-family-display); font-size: var(--font-size-lg); font-weight: 400; color: var(--color-text-primary); margin: 0 0 var(--space-2) 0; }
+.emptyText { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.scrollSentinel { height: 20px; margin: var(--space-6) 0; }

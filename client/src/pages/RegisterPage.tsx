@@ -45,7 +45,7 @@ export default function RegisterPage() {
     try {
       const { data } = await apiClient.post('/api/auth/register', { username, email, password })
       setAuth(data.user, data.accessToken)
-      navigate('/', { replace: true })
+      navigate('/dashboard', { replace: true })
     } catch (err: any) {
       setServerError(err.response?.data?.error || 'Registration failed')
     } finally {
@@ -61,16 +61,16 @@ export default function RegisterPage() {
           <span className={styles.asideMark}>Momentra</span>
         </div>
         <p className={styles.asideFooter}>
-          <strong>Every event, every photo, in one place.</strong><br />
-          Galleries, search, and shared albums for your club.
+          <strong>AI-powered event photo management.</strong><br />
+          Upload, organize, and share — built for teams that move fast.
         </p>
       </aside>
 
       <main className={styles.main}>
         <div className={styles.card}>
           <p className={styles.eyebrow}>Create account</p>
-          <h1 className={styles.title}>Join your club.</h1>
-          <p className={styles.subtitle}>Set up an account to upload, browse, and share.</p>
+          <h1 className={styles.title}>Start for free.</h1>
+          <p className={styles.subtitle}>Create your workspace and start managing event photos in minutes.</p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
             {serverError && <div className={styles.error}>{serverError}</div>}

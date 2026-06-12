@@ -17,7 +17,7 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const setAuth = useAuthStore((s) => s.setAuth)
-  const from = (location.state as LocationState)?.from?.pathname || '/'
+  const from = (location.state as LocationState)?.from?.pathname || '/dashboard'
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -42,8 +42,8 @@ export default function LoginPage() {
           <span className={styles.asideMark}>Momentra</span>
         </div>
         <p className={styles.asideFooter}>
-          <strong>Every event, every photo, in one place.</strong><br />
-          Galleries, search, and shared albums for your club.
+          <strong>AI-powered event photo management.</strong><br />
+          Upload, organize, and share — built for teams that move fast.
         </p>
       </aside>
 

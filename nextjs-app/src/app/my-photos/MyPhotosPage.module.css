@@ -1,0 +1,16 @@
+.page { max-width: var(--content-max-width); margin: 0 auto; padding: var(--space-8); }
+@media (max-width: 768px) { .page { padding: var(--space-5) var(--space-4); } }
+.header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-border); }
+.title { font-family: var(--font-family-display); font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; color: var(--color-text-primary); margin: 0 0 var(--space-1) 0; }
+.subtitle { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.removeButton { padding: var(--space-2) var(--space-4); font-size: var(--font-size-sm); font-weight: 500; color: var(--color-error-600); background-color: var(--color-error-50); border: 1px solid var(--color-error-500); border-radius: var(--radius-md); cursor: pointer; white-space: nowrap; }
+.removeButton:disabled { opacity: 0.5; cursor: not-allowed; }
+.loading { text-align: center; padding: var(--space-16); color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+.optInPage { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: var(--space-8); }
+.optInCard { max-width: 440px; width: 100%; text-align: center; padding: var(--space-12) var(--space-8); background-color: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-2xl); }
+.optInIcon { font-size: 48px; margin-bottom: var(--space-4); }
+.optInTitle { font-family: var(--font-family-display); font-size: var(--font-size-2xl); font-weight: 400; color: var(--color-text-primary); margin: 0 0 var(--space-3) 0; }
+.optInText { font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin: 0 0 var(--space-6) 0; }
+.optInButton { display: inline-block; padding: var(--space-3) var(--space-8); background-color: var(--color-neutral-900); color: var(--color-text-inverse); border-radius: var(--radius-md); font-size: var(--font-size-sm); font-weight: 600; cursor: pointer; transition: background-color var(--transition-fast); }
+.optInButton:hover { background-color: var(--color-neutral-800); }
+.optInError { margin-top: var(--space-3); font-size: var(--font-size-sm); color: var(--color-error-600); }

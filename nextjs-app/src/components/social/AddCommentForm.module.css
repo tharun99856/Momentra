@@ -1,0 +1,37 @@
+.form { width: 100%; margin-bottom: var(--space-4); }
+.form.compact { margin-bottom: var(--space-2); }
+.inputWrapper { display: flex; flex-direction: column; gap: var(--space-2); }
+.textarea {
+  width: 100%; padding: var(--space-3);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  font-family: inherit; font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal); resize: vertical; min-height: 60px;
+  background-color: var(--color-bg-primary); color: var(--color-text-primary);
+  transition: border-color var(--transition-fast);
+}
+.textarea::placeholder { color: var(--color-text-tertiary); }
+.textarea:focus { outline: none; border-color: var(--color-text-primary); }
+.textarea.error { border-color: var(--color-error-500); }
+.textarea:disabled { background-color: var(--color-bg-secondary); cursor: not-allowed; opacity: 0.6; }
+.footer { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); }
+.charCounter { font-size: var(--font-size-xs); color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.charCounter.warning { color: var(--color-warning-600); font-weight: 500; }
+.charCounter.error { color: var(--color-error-600); font-weight: 600; }
+.actions { display: flex; gap: var(--space-2); }
+.cancelButton, .submitButton {
+  padding: 6px var(--space-3); border-radius: var(--radius-md);
+  font-size: var(--font-size-sm); font-weight: 500; cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  border: 1px solid transparent;
+}
+.cancelButton { background-color: var(--color-bg-primary); border-color: var(--color-border); color: var(--color-text-primary); }
+.cancelButton:hover:not(:disabled) { border-color: var(--color-border-strong); }
+.submitButton { background-color: var(--color-neutral-900); color: var(--color-text-inverse); }
+.submitButton:hover:not(:disabled) { background-color: var(--color-neutral-800); }
+.cancelButton:disabled, .submitButton:disabled { opacity: 0.5; cursor: not-allowed; }
+.errorMessage {
+  margin-top: var(--space-2); padding: var(--space-2) var(--space-3);
+  background-color: var(--color-error-50); border: 1px solid var(--color-error-500);
+  border-radius: var(--radius-md); color: var(--color-error-600); font-size: var(--font-size-xs);
+}
+.hint { margin-top: 4px; font-size: 11px; color: var(--color-text-tertiary); }
