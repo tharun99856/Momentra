@@ -71,14 +71,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className={styles.statsBar}>
-        <div className={styles.statsInner}>
-          <div className={styles.stat}><span className={styles.statNumber}>10K+</span><span className={styles.statLabel}>Events created</span></div>
-          <div className={styles.stat}><span className={styles.statNumber}>2M+</span><span className={styles.statLabel}>Photos managed</span></div>
-          <div className={styles.stat}><span className={styles.statNumber}>500+</span><span className={styles.statLabel}>Organizations</span></div>
-          <div className={styles.stat}><span className={styles.statNumber}>99.9%</span><span className={styles.statLabel}>Uptime SLA</span></div>
-        </div>
-      </section>
+
 
       <section id="features" className={styles.features}>
         <div className={styles.sectionInner}>
@@ -130,7 +123,7 @@ export default function LandingPage() {
       <section className={styles.ctaSection}>
         <div className={styles.ctaInner}>
           <h2 className={styles.ctaTitle}>Ready to transform your<br />event photography?</h2>
-          <p className={styles.ctaSubtitle}>Join hundreds of organizations already using Momentra.</p>
+          <p className={styles.ctaSubtitle}>Start capturing and sharing your event memories today.</p>
           <Link href="/register" className={styles.ctaButton}>Get started for free <span className={styles.heroArrow}>→</span></Link>
         </div>
       </section>

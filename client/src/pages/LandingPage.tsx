@@ -138,7 +138,7 @@ export default function LandingPage() {
       </header>
 
       {/* Stats Bar */}
-      <section className={styles.statsBar}>
+      {/* <section className={styles.statsBar}>
         <div className={styles.statsInner}>
           <div className={styles.stat}>
             <span className={styles.statNumber}>10K+</span>
@@ -157,7 +157,7 @@ export default function LandingPage() {
             <span className={styles.statLabel}>Uptime SLA</span>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Features */}
       <section id="features" className={styles.features}>
@@ -250,7 +250,7 @@ export default function LandingPage() {
             Ready to transform your<br />event photography?
           </h2>
           <p className={styles.ctaSubtitle}>
-            Join hundreds of organizations already using Momentra.
+            Start capturing and sharing your event memories today.
           </p>
           <Link to="/register" className={styles.ctaButton}>
             Get started for free
